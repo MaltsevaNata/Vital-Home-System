@@ -29,7 +29,7 @@ void setup()
   Serial.begin(9600);           
 
   // Attempt to connect to a specific access point
-  WiFi.begin("TP-Link_D558", "qwerty12345");
+  WiFi.begin("wifi_name", "wifi_pass");
 
   // Keep checking the connection status until it is connected
   while (WiFi.status() != WL_CONNECTED) {
