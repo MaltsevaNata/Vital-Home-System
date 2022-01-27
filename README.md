@@ -13,4 +13,3 @@ Home automation system based on OpenHAB and custom items
 ![3d model bottom](./feeder/3dmodel_bottom.jpg)
 - Real model:  <br />
 ![real model](./feeder/real.jpg)
-![night](./feeder/night.jpg)
