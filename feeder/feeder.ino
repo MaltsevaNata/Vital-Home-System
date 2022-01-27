@@ -55,8 +55,8 @@ void setup()
   */
   calibration_factor = 15.45; // got by experiment calibration
 
-  servo.attach(CONTROL, 640, 2600); //привязываем привод к порту 10
-  servo.write(0); // дефолтное состояние
+  servo.attach(CONTROL, 640, 2600); //servo pin and min/max values
+  servo.write(0); // default poistion
 
 }
 
