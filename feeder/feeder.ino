@@ -8,7 +8,7 @@
 
 #define DT  5                     // DT output of sensor HX711 (GPIO5)
 #define SCK 4                    // SCK output of sensor HX711 (GPIO4)
-#define CONTROL 2                // servo control pin (GPIO2)
+#define CONTROL 14                // servo control pin (GPIO14)
  
 HX711 scale;
 WiFiClient WIFI_CLIENT;
@@ -21,7 +21,7 @@ float calibration_factor = 15.45;    // tenzo sensor calibration factor
 float weight_units;
 float weight_gr;
 float filtered_weight;
-int time_read = 0;
+int received_weight_to_feed = 0;
 bool started_feeding = false;
 
 void setup()
@@ -70,10 +70,9 @@ void myMessageArrived(char* topic, byte* payload, unsigned int length) {
    
   // Print the message to the serial port
   Serial.println(message);
+  received_weight_to_feed = atoi(message.c_str());
+  started_feeding = true;
 
-  if (message == "cat") {
-    started_feeding = true;
-  }
 }
 
 
@@ -116,7 +115,7 @@ void loop() {
   }
 
   if (started_feeding ) {
-    if (filtered_weight < 20) { // if not enough food 
+    if (filtered_weight < received_weight_to_feed) { // if not enough food 
       open_slider();
     }
     else {
@@ -138,23 +137,18 @@ void loop() {
 
   // perform filtration
   filtered_weight = findMedianN(weight_gr);
-  
-  time_read = time_read + 1;
 
-  if (time_read >= 50) { // once in 500 ms send weight data
-    Serial.print("weight_gr =");
-    Serial.print(filtered_weight);
-    Serial.println(" gr");
- 
-    jsondoc["weight"] = filtered_weight;
-    char out[128];
-    serializeJson(jsondoc, out);
+  Serial.print("weight_gr =");
+  Serial.print(filtered_weight);
+  Serial.println(" gr");
 
-    // Publish a message to a topic
-    MQTT_CLIENT.publish("feeder/info",  out);
+  jsondoc["weight"] = filtered_weight;
+  char out[128];
+  serializeJson(jsondoc, out);
 
-    time_read = 0;
-  }
+  // Publish a message to a topic
+  MQTT_CLIENT.publish("feeder/info",  out);
+
   MQTT_CLIENT.loop();
   delay(10);
 }
