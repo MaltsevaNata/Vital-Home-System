@@ -5,6 +5,8 @@ Home automation system based on OpenHAB and custom items
    - OpenHabian is installed on Raspberry PI model A (1 version)
    - Web interface can be accessed locally only http://192.168.0.115:8080/
    - Logs http://192.168.0.115:9001/
+   - Communication between devices: <br />
+![communication](./feeder/communication.JPG)
 2. First custom project is an automatic pet feeder.
  - Schematic: <br />
 ![schematic](./feeder/img/schematic.JPG)
