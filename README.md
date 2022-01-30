@@ -7,9 +7,9 @@ Home automation system based on OpenHAB and custom items
    - Logs http://192.168.0.115:9001/
 2. First custom project is an automatic pet feeder.
  - Schematic: <br />
-![schematic](./feeder/schematic.JPG)
+![schematic](./feeder/img/schematic.JPG)
 - 3D model: <br />
-![3d model front](./feeder/3dmodel_front.jpg)
-![3d model bottom](./feeder/3dmodel_bottom.jpg)
+![3d model front](./feeder/img/3dmodel_front.jpg)
+![3d model bottom](./feeder/img/3dmodel_bottom.jpg)
 - Real model:  <br />
-![real model](./feeder/real.jpg)
+![real model](./feeder/img/real.jpg)
